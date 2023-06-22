@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import burgerImage from "@/assets/images/burger.png";
+import burgerImage from "@/assets/images/blt-burger.png";
 import Image from "next/image";
 //@ts-ignore
 import { UilShoppingCart } from "@iconscout/react-unicons";
@@ -7,6 +7,7 @@ import { UilShoppingCart } from "@iconscout/react-unicons";
 import { modifyCart } from "@/utils/reducers/cartReducer";
 import { useDispatch } from "react-redux";
 import Counter from "./Counter";
+import { openNotif } from "@/utils/reducers/notifsReducer";
 
 const Product = (params: any) => {
   const { id, name, price } = params.data;
@@ -22,6 +23,8 @@ const Product = (params: any) => {
     };
 
     if (counter > 0) dispatch(modifyCart(newCartItem));
+
+    dispatch(openNotif({type: 'Add', message: `${name} (x${counter})`}))
   };
 
   const handleCounter = (type: string) => {
@@ -34,11 +37,11 @@ const Product = (params: any) => {
 
   return (
     <div className="product_item xs:w-15 xs:m-auto" key={id}>
-      <div className="h-40">
+      <div className="h-44 mb-5">
         <Image
           src={burgerImage}
           alt={name}
-          className="object-contain w-full h-full"
+          className="object-cover w-full h-full rounded-lg"
         />
       </div>
       <div className="font-bold text-sm text-center mb-5">

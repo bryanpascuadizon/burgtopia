@@ -6,10 +6,10 @@ import { RootState } from "@/utils/store";
 import CartItem from "@/components/CartItem";
 
 const Cart = () => {
-  const allDispatch = useSelector((state: RootState) => state.cart);
+  const cartState = useSelector((state: RootState) => state.cart);
   const [cartList, setCartList] = useState<Array<object>>([]);
 
-  const { items, totalItems, totalPrice } = allDispatch;
+  const { items, totalItems, totalPrice } = cartState;
 
   useEffect(() => {
     setCartList(items);
@@ -25,7 +25,7 @@ const Cart = () => {
           <div className="rounded-lg grid grid-cols-5 mb-5 text-center items-center font-bold">
             <p className="">Total</p>
             <p></p>
-            <p className="">${totalPrice}</p>
+            <p className="">${(totalPrice).toFixed(2)}</p>
             <p className="">{totalItems}</p>
             <button className="rounded-lg bg-orange-300 p-2">Checkout</button>
           </div>

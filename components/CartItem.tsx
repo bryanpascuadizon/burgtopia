@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import burgerImage from "@/assets/images/burger.png";
+import burgerImage from "@/assets/images/blt-burger.png";
 //@ts-ignore
 import { UilTrashAlt } from "@iconscout/react-unicons";
 import { decrementCount, deleteItemFromCart, incrementCount } from "@/utils/reducers/cartReducer";
@@ -20,18 +20,18 @@ const CartItem = (params: any) => {
   }
 
   return (
-    <div className="cart_item rounded-lg grid grid-cols-5 bg-grey-100 mb-5 text-center items-center" key={id}>
+    <div className="cart_item rounded-lg grid grid-cols-5 bg-grey-100 mb-5 text-center items-center p-2" key={id}>
       <div className="cart_image">
         <Image
           src={burgerImage}
           alt={name}
           width={90}
           height={90}
-          className="m-auto"
+          className="m-auto rounded-lg"
         />
       </div>
       <div className="cart_name font-bold text-left">{name}</div>
-      <div className="cart_price">${price * count}</div>
+      <div className="cart_price">${(price * count).toFixed(2)}</div>
       <div className="cart_counter flex">
         <Counter counter={count} handleCounter={handleCounter}/>
       </div>

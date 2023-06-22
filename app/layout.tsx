@@ -1,4 +1,5 @@
 import Nav from "@/components/Nav";
+import Notifications from "@/components/Notification";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { Providers } from "@/utils/providers";
@@ -17,10 +18,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="container mx-auto max-w-3xl">
+        <div className="container mx-auto max-w-3xl relative">
           <Providers>
             <Nav />
             <section className="mr-5 ml-5">{children}</section>
+            <Notifications type="" message="" />
           </Providers>
         </div>
       </body>

@@ -3,13 +3,16 @@
 import React, { useEffect, useState } from "react";
 
 //COMPONENT
-import Product from "@/components/Product";
+import Product from "@/components/Product"
 
 //ASSSETS
 import products from "@/assets/products";
+import { useDispatch } from "react-redux";
+import { openNotif } from "@/utils/reducers/notifsReducer";
 
 const Home = () => {
   const [productList, setProductList] = useState<Array<object>>([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setProductList(products);
@@ -22,6 +25,7 @@ const Home = () => {
             <Product data={item} key={item.id} />
           ))}
         </div>
+        <br />
       </div>
   );
 };
