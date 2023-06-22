@@ -27,3 +27,11 @@ body {
 .product_item {
   @apply p-3 h-auto rounded-lg bg-grey-100
 }
+
+img {
+  height: 80px;
+}
+
+.about_us > p {
+  @apply mb-5
+}

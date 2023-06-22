@@ -6,14 +6,25 @@ const initialState: any = {
   totalPrice: 0,
 };
 
+const itemPriceReCount = (stateItems: any, state: any) => {
+  let tempTotalItems: number = 0;
+  let tempTotalPrice: number = 0;
+
+  stateItems.map((item: any) => {
+    tempTotalPrice += item.price * item.count;
+    tempTotalItems += item.count;
+  });
+
+  state.totalItems = tempTotalItems;
+  state.totalPrice = tempTotalPrice;
+};
+
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
     modifyCart: (state, action) => {
       const { payload } = action;
-      let tempTotalItems: number = 0;
-      let tempTotalPrice: number = 0;
 
       const findItem: number = current(state.items).findIndex(
         (item: any) => item.name === payload.name
@@ -25,13 +36,7 @@ export const cartSlice = createSlice({
         state.items.push(payload);
       }
 
-      state.items.map((item: any) => {
-        tempTotalPrice += item.price * item.count;
-        tempTotalItems += item.count;
-      });
-
-      state.totalItems = tempTotalItems;
-      state.totalPrice = tempTotalPrice;
+      itemPriceReCount(state.items, state)
     },
     deleteItemFromCart: (state, action) => {
       const { payload } = action;
@@ -41,6 +46,8 @@ export const cartSlice = createSlice({
       );
 
       state.items = filterCart;
+
+      itemPriceReCount(filterCart, state)
     },
     incrementCount: (state, action) => {
       const { payload } = action;

@@ -10,7 +10,7 @@ interface CounterProps {
 const Counter = ({counter, handleCounter} : CounterProps) => {
 
   return (
-    <div className="product_increment flex-grow grid grid-cols-3 max-w-10 p-1 bg-grey-200 rounded-lg">
+    <div className="product_increment flex-grow grid grid-cols-3 max-w-10 p-1 bg-grey-300 rounded-lg">
       <button
         onClick={() => handleCounter("")}
         className="text-center font-bold"

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import burgerImage from "@/assets/images/blt-burger.png";
+import burgerImage from "@/assets/images/blt.png";
 import Image from "next/image";
 //@ts-ignore
 import { UilShoppingCart } from "@iconscout/react-unicons";
@@ -10,7 +10,7 @@ import Counter from "./Counter";
 import { openNotif } from "@/utils/reducers/notifsReducer";
 
 const Product = (params: any) => {
-  const { id, name, price } = params.data;
+  const { id, name, price, image } = params.data;
   const [counter, setCounter] = useState<number>(1);
   const dispatch = useDispatch();
 
@@ -19,6 +19,7 @@ const Product = (params: any) => {
       id: cartItem.id,
       name: cartItem.name,
       price: cartItem.price,
+      image: cartItem.image,
       count: counter,
     };
 
@@ -39,7 +40,7 @@ const Product = (params: any) => {
     <div className="product_item xs:w-15 xs:m-auto" key={id}>
       <div className="h-44 mb-5">
         <Image
-          src={burgerImage}
+          src={image}
           alt={name}
           className="object-cover w-full h-full rounded-lg"
         />

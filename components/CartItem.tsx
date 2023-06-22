@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import burgerImage from "@/assets/images/blt-burger.png";
+import burgerImage from "@/assets/images/blt.png";
 //@ts-ignore
 import { UilTrashAlt } from "@iconscout/react-unicons";
 import { decrementCount, deleteItemFromCart, incrementCount } from "@/utils/reducers/cartReducer";
@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import Counter from "./Counter";
 
 const CartItem = (params: any) => {
-  const { id, name, price, count } = params.data;
+  const { id, name, price, image, count } = params.data;
   const dispatch = useDispatch();
 
   const handleCounter = (type: string) => {
@@ -23,11 +23,11 @@ const CartItem = (params: any) => {
     <div className="cart_item rounded-lg grid grid-cols-5 bg-grey-100 mb-5 text-center items-center p-2" key={id}>
       <div className="cart_image">
         <Image
-          src={burgerImage}
+          src={image}
           alt={name}
-          width={90}
-          height={90}
-          className="m-auto rounded-lg"
+          width={80}
+          height={80}
+          className="m-auto rounded-lg max-h-80 max-w-80 object-cover"
         />
       </div>
       <div className="cart_name font-bold text-left">{name}</div>
