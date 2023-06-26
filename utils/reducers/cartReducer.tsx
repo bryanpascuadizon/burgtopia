@@ -1,4 +1,5 @@
 import { createSlice, current } from "@reduxjs/toolkit";
+import { closeNotif } from "./notifsReducer";
 
 const initialState: any = {
   items: [],
@@ -42,7 +43,7 @@ export const cartSlice = createSlice({
       const { payload } = action;
       let filterCart: Array<object> = [];
       filterCart = state.items.filter(
-        (item: any) => item.name !== payload.name
+        (item: any) => item.name !== payload.data.name
       );
 
       state.items = filterCart;

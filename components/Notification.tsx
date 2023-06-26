@@ -9,15 +9,20 @@ import { RootState } from "@/utils/store";
 import { UilCheckCircle } from "@iconscout/react-unicons";
 //@ts-ignore
 import { UilTrashAlt } from "@iconscout/react-unicons";
+import { deleteItemFromCart } from "@/utils/reducers/cartReducer";
 
 const Notifications = () => {
-  const [open, setOpen] = useState(true);
   const notifState = useSelector((state: RootState) => state.notifs);
   const dispatch = useDispatch();
 
-  const { type, message, isOpen } = notifState;
+  const { type, message, isOpen, data } = notifState;
 
   const cancelButtonRef = useRef(null);
+
+  const handleRemoveItemFromCart = () => {
+    dispatch(deleteItemFromCart({data}))
+    dispatch(closeNotif())
+  }
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
@@ -81,6 +86,27 @@ const Notifications = () => {
                     </div>
                   </div>
                 </div>
+                {type === "remove" ? (
+                  <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 text-md justify-center font-bold">
+                    <button
+                      type="button"
+                      className="mt-3 inline-flex w-full justify-center rounded-md bg-gray-200 px-3 py-2 shadow-sm sm:mt-0 sm:w-auto"
+                      onClick={() => dispatch(closeNotif())}
+                      ref={cancelButtonRef}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      className="mr-3 inline-flex w-full rounded-md px-3 py-2 shadow-sm bg-orange-500 sm:ml-3 sm:w-auto"
+                      onClick={handleRemoveItemFromCart}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ) : (
+                  ""
+                )}
               </Dialog.Panel>
             </Transition.Child>
           </div>

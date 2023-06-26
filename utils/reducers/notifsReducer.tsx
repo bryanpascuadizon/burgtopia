@@ -4,11 +4,13 @@ interface NotifsReducerTypes {
   type: string;
   message: string;
   isOpen: boolean;
+  data?: {}
 }
 const initialState: NotifsReducerTypes = {
   type: "",
   message: "",
   isOpen: false,
+  data: {}
 };
 
 export const notifSlice = createSlice({
@@ -19,6 +21,7 @@ export const notifSlice = createSlice({
       const { payload } = action;
       state.message = payload.message;
       state.type = payload.type;
+      state.data = payload.data
       state.isOpen = true;
     },
     closeNotif: (state) => {

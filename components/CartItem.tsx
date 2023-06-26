@@ -42,12 +42,9 @@ const CartItem = (params: any) => {
         <Counter counter={count} handleCounter={handleCounter} />
       </div>
       <div className="cart_action">
-        <button onClick={() => dispatch(deleteItemFromCart(params.data))}>
+        <button type="button" onClick={() => dispatch(openNotif({type: 'remove', message: `${name} (x${count})`, data: { name: name }}))}>
           <UilTrashAlt className="inline" />
         </button>
-        {/* <button onClick={() => dispatch(openNotif({type: 'remove', message: `${name} (x${count})`}))}>
-          <UilTrashAlt className="inline" />
-        </button> */}
       </div>
     </div>
   );
