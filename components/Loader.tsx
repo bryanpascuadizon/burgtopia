@@ -7,10 +7,6 @@ const Loader = () => {
   const loadState = useSelector((state: RootState) => state.loader);
   const { isLoading } = loadState;
 
-  useEffect(() => {
-    console.log("Load State: ", loadState);
-  }, []);
-
   return isLoading ? (
     <div className="w-full mb-4">
       <div className="animate-pulse flex">

@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 //@ts-ignore
 import { UilShoppingCart } from "@iconscout/react-unicons";
-import { Provider, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/utils/store";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { closeLoader, openLoader } from "@/utils/reducers/loadReducer";
@@ -32,7 +32,7 @@ const Nav = () => {
   };
 
   return session ? (
-    <div className="flex flex-between w-full mb-5 mt-5 pl-5 pr-5">
+    <div className="flex flex-between w-full mb-5 mt-5">
       <div className="nav_group flex-grow self-center">
         <Link href="/" className="nav_group_link">
           BurgTopia
@@ -57,7 +57,7 @@ const Nav = () => {
       </div>
     </div>
   ) : (
-    <div className="flex flex-between w-full mb-5 mt-5 pl-5 pr-5">
+    <div className="flex flex-between w-full mb-10 mt-10 pl-5 pr-5">
       <div className="nav_group flex-grow">
         <Link href="/" className="nav_group_link">
           BurgTopia

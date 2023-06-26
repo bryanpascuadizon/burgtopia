@@ -46,6 +46,8 @@ const Product = (params: any) => {
           src={image}
           alt={name}
           className="object-cover w-full h-full rounded-lg"
+          width={300}
+          height={300}
         />
       </div>
       <div className="font-bold text-sm text-center">

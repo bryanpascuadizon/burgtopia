@@ -3,7 +3,6 @@ import Image from "next/image";
 import { UilTrashAlt } from "@iconscout/react-unicons";
 import {
   decrementCount,
-  deleteItemFromCart,
   incrementCount,
 } from "@/utils/reducers/cartReducer";
 import { openNotif } from "@/utils/reducers/notifsReducer";
@@ -30,10 +29,11 @@ const CartItem = (params: any) => {
     >
       <div className="cart_image">
         <Image
+          key={id}
           src={image}
-          alt={name}
           width={80}
           height={80}
+          alt={name}
           className="m-auto rounded-lg max-h-80 max-w-80 object-cover"
         />
       </div>
@@ -43,7 +43,18 @@ const CartItem = (params: any) => {
         <Counter counter={count} handleCounter={handleCounter} />
       </div>
       <div className="cart_action">
-        <button type="button" onClick={() => dispatch(openNotif({type: REMOVE, message: `${name} (x${count})`, data: { name: name }}))}>
+        <button
+          type="button"
+          onClick={() =>
+            dispatch(
+              openNotif({
+                type: REMOVE,
+                message: `${name} (x${count})`,
+                data: { name: name },
+              })
+            )
+          }
+        >
           <UilTrashAlt className="inline" />
         </button>
       </div>
