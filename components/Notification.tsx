@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Fragment, useRef, useState } from "react";
+import React, { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeNotif } from "@/utils/reducers/notifsReducer";
@@ -10,6 +10,7 @@ import { UilCheckCircle } from "@iconscout/react-unicons";
 //@ts-ignore
 import { UilTrashAlt } from "@iconscout/react-unicons";
 import { deleteItemFromCart } from "@/utils/reducers/cartReducer";
+import { ADD, REMOVE } from "@/utils/constants";
 
 const Notifications = () => {
   const notifState = useSelector((state: RootState) => state.notifs);
@@ -60,7 +61,7 @@ const Notifications = () => {
                   <div className="text-center">
                     <div className="mt-3 mb-3 text-center">
                       <Dialog.Title className="text-center leading-6 text-orange-500 text-md m-auto w-fit">
-                        {type === "Add" ? (
+                        {type === ADD ? (
                           <UilCheckCircle
                             height="40"
                             width="40"
@@ -75,7 +76,7 @@ const Notifications = () => {
                         )}
                         <span className="text-black inline align-middle">
                           {" "}
-                          {type === "Add"
+                          {type === ADD
                             ? "Added to your cart:"
                             : "Remove from your cart?"}
                         </span>
@@ -86,7 +87,7 @@ const Notifications = () => {
                     </div>
                   </div>
                 </div>
-                {type === "remove" ? (
+                {type === REMOVE ? (
                   <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 text-md justify-center font-bold">
                     <button
                       type="button"

@@ -4,13 +4,15 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 //@ts-ignore
 import { UilShoppingCart } from "@iconscout/react-unicons";
-import { Provider, useSelector } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/utils/store";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import { closeLoader, openLoader } from "@/utils/reducers/loadReducer";
 
 const Nav = () => {
   const [provider, setProvider] = useState<any>(null);
   const { data: session } = useSession();
+  const dispatch = useDispatch();
   const cartState = useSelector((state: RootState) => state.cart);
 
   const { totalItems } = cartState;
@@ -22,6 +24,12 @@ const Nav = () => {
     };
     setUpProviders();
   }, []);
+
+  const handleSignIn = async (id: any) => {
+    dispatch(openLoader());
+    await signIn(id);
+    dispatch(closeLoader);
+  };
 
   return session ? (
     <div className="flex flex-between w-full mb-5 mt-5 pl-5 pr-5">
@@ -61,7 +69,7 @@ const Nav = () => {
             <button
               type="button"
               key={provider.name}
-              onClick={() => signIn(provider.id)}
+              onClick={() => handleSignIn(provider.id)}
               className="black_btn"
             >
               Sign In

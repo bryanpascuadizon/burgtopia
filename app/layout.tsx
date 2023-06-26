@@ -3,6 +3,7 @@ import Notifications from "@/components/Notification";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { Providers } from "@/utils/providers";
+import Loader from "@/components/Loader";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -18,13 +19,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="container mx-auto max-w-3xl relative">
-          <Providers>
+        <Providers>
+          <Loader />
+          <div className="container mx-auto max-w-3xl relative">
             <Nav />
             <section className="mr-5 ml-5">{children}</section>
-            <Notifications type="" message="" />
-          </Providers>
-        </div>
+            <Notifications />
+          </div>
+        </Providers>
       </body>
     </html>
   );

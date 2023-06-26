@@ -9,13 +9,14 @@ import {
 import { openNotif } from "@/utils/reducers/notifsReducer";
 import { useDispatch } from "react-redux";
 import Counter from "./Counter";
+import { ADD, REMOVE } from "@/utils/constants";
 
 const CartItem = (params: any) => {
   const { id, name, price, image, count } = params.data;
   const dispatch = useDispatch();
 
   const handleCounter = (type: string) => {
-    if (type === "add") {
+    if (type === ADD) {
       dispatch(incrementCount(name));
     } else {
       dispatch(decrementCount(name));
@@ -42,7 +43,7 @@ const CartItem = (params: any) => {
         <Counter counter={count} handleCounter={handleCounter} />
       </div>
       <div className="cart_action">
-        <button type="button" onClick={() => dispatch(openNotif({type: 'remove', message: `${name} (x${count})`, data: { name: name }}))}>
+        <button type="button" onClick={() => dispatch(openNotif({type: REMOVE, message: `${name} (x${count})`, data: { name: name }}))}>
           <UilTrashAlt className="inline" />
         </button>
       </div>

@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import Counter from "./Counter";
 import { openNotif } from "@/utils/reducers/notifsReducer";
 import { useSession } from "next-auth/react";
+import { ADD, REMOVE } from "@/utils/constants";
 
 const Product = (params: any) => {
   const { id, name, price, image } = params.data;
@@ -27,7 +28,7 @@ const Product = (params: any) => {
 
     if (counter > 0) dispatch(modifyCart(newCartItem));
 
-    dispatch(openNotif({ type: "Add", message: `${name} (x${counter})` }));
+    dispatch(openNotif({ type: ADD, message: `${name} (x${counter})` }));
   };
 
   const handleCounter = (type: string) => {
