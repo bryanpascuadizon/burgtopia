@@ -19,13 +19,20 @@ const Cart = () => {
     <div>
       {cartList.length > 0 ? (
         <div>
+          <div className="rounded-lg grid grid-cols-5 mb-5 text-center items-center font-bold">
+            <p className=""></p>
+            <p className="text-left font-bold">Item</p>
+            <p className="">Price</p>
+          <p className="">Quantity</p>
+            <p className=""></p>
+          </div>
           {cartList.map((item) => (
-            <CartItem data={item}/>
+            <CartItem data={item} />
           ))}
           <div className="rounded-lg grid grid-cols-5 mb-5 text-center items-center font-bold">
-            <p className="">Total</p>
             <p></p>
-            <p className="">${(totalPrice).toFixed(2)}</p>
+            <p className="text-left">Total</p>
+            <p className="">${totalPrice.toFixed(2)}</p>
             <p className="">{totalItems}</p>
             <button className="rounded-lg bg-orange-300 p-2">Checkout</button>
           </div>

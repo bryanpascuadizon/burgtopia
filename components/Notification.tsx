@@ -7,6 +7,8 @@ import { closeNotif } from "@/utils/reducers/notifsReducer";
 import { RootState } from "@/utils/store";
 //@ts-ignore
 import { UilCheckCircle } from "@iconscout/react-unicons";
+//@ts-ignore
+import { UilTrashAlt } from "@iconscout/react-unicons";
 
 const Notifications = () => {
   const [open, setOpen] = useState(true);
@@ -52,9 +54,26 @@ const Notifications = () => {
                 <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                   <div className="text-center">
                     <div className="mt-3 mb-3 text-center">
-                      <Dialog.Title className="text-center leading-6 text-orange-500 text-lg m-auto w-fit">
-                        {/* {type} */}
-                        <UilCheckCircle height="40" width="40"/>
+                      <Dialog.Title className="text-center leading-6 text-orange-500 text-md m-auto w-fit">
+                        {type === "Add" ? (
+                          <UilCheckCircle
+                            height="40"
+                            width="40"
+                            className="inline"
+                          />
+                        ) : (
+                          <UilTrashAlt
+                            height="40"
+                            width="40"
+                            className="inline"
+                          />
+                        )}
+                        <span className="text-black inline align-middle">
+                          {" "}
+                          {type === "Add"
+                            ? "Added to your cart:"
+                            : "Remove from your cart?"}
+                        </span>
                       </Dialog.Title>
                       <div className="mt-5">
                         <p className="text-md">{message}</p>

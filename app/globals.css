@@ -21,8 +21,9 @@ body {
 }
 
 .nav_group_link {
-  @apply p-5 hover:text-orange-500
+  @apply hover:text-orange-500 m-5
 }
+
 
 .product_item {
   @apply p-3 h-auto rounded-lg bg-grey-100

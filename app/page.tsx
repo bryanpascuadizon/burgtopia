@@ -7,12 +7,9 @@ import Product from "@/components/Product"
 
 //ASSSETS
 import products from "@/assets/products";
-import { useDispatch } from "react-redux";
-import { openNotif } from "@/utils/reducers/notifsReducer";
 
 const Home = () => {
   const [productList, setProductList] = useState<Array<object>>([]);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     setProductList(products);

@@ -22,7 +22,6 @@ export default function RootLayout({
           <Providers>
             <Nav />
             <section className="mr-5 ml-5">{children}</section>
-            <Notifications type="" message="" />
           </Providers>
         </div>
       </body>

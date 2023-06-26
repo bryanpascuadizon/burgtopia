@@ -31,13 +31,6 @@ const AboutUs = () => {
         satisfying dining experience for our customers.
       </p>
       <p>
-        At BurgTopia, we are committed to excellent customer service. Our
-        friendly and knowledgeable staff is always ready to assist you in
-        choosing the perfect burger that suits your preferences. We value your
-        feedback and continuously work to improve and expand our menu to cater
-        to the diverse tastes of our customers.
-      </p>
-      <p>
         Whether you're grabbing a quick bite on-the-go or sitting down for a
         leisurely meal, BurgTopia promises to deliver a burger experience that
         will leave you craving for more. Join us in our burger paradise and
