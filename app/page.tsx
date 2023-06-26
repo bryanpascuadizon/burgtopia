@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 
-//COMPONENT
+//COMPONENTS
 import Product from "@/components/Product";
 
 const Home = () => {

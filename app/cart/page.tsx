@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/utils/store";
+
+//COMPONENTS
 import CartItem from "@/components/CartItem";
 
 const Cart = () => {

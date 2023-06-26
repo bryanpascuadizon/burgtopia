@@ -1,14 +1,18 @@
 import React, { useState } from "react";
-import burgerImage from "@/assets/images/blt.png";
+import { useDispatch } from "react-redux";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 //@ts-ignore
 import { UilShoppingCart } from "@iconscout/react-unicons";
 
-import { modifyCart } from "@/utils/reducers/cartReducer";
-import { useDispatch } from "react-redux";
+//COMPONENTS
 import Counter from "./Counter";
+
+//REDUCER ACTIONS
 import { openNotif } from "@/utils/reducers/notifsReducer";
-import { useSession } from "next-auth/react";
+import { modifyCart } from "@/utils/reducers/cartReducer";
+
+//CONSTANTS
 import { ADD, REMOVE } from "@/utils/constants";
 
 const Product = (params: any) => {

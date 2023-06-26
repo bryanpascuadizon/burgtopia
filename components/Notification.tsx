@@ -3,13 +3,17 @@
 import React, { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { closeNotif } from "@/utils/reducers/notifsReducer";
 import { RootState } from "@/utils/store";
 //@ts-ignore
 import { UilCheckCircle } from "@iconscout/react-unicons";
 //@ts-ignore
 import { UilTrashAlt } from "@iconscout/react-unicons";
+
+//REDUCER ACTIONS
+import { closeNotif } from "@/utils/reducers/notifsReducer";
 import { deleteItemFromCart } from "@/utils/reducers/cartReducer";
+
+//CONSTANTS
 import { ADD, REMOVE } from "@/utils/constants";
 
 const Notifications = () => {

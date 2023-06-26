@@ -1,13 +1,19 @@
 import Image from "next/image";
 //@ts-ignore
 import { UilTrashAlt } from "@iconscout/react-unicons";
+import { useDispatch } from "react-redux";
+
+//COMPONENTS
+import Counter from "./Counter";
+
+//REDUCER ACTIONS
 import {
   decrementCount,
   incrementCount,
 } from "@/utils/reducers/cartReducer";
 import { openNotif } from "@/utils/reducers/notifsReducer";
-import { useDispatch } from "react-redux";
-import Counter from "./Counter";
+
+//CONSTANTS
 import { ADD, REMOVE } from "@/utils/constants";
 
 const CartItem = (params: any) => {

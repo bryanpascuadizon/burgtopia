@@ -1,6 +1,4 @@
-import { incrementCount } from "@/utils/reducers/cartReducer";
 import React from "react";
-import { useDispatch } from "react-redux";
 
 interface CounterProps {
     counter: number,

@@ -7,6 +7,8 @@ import { UilShoppingCart } from "@iconscout/react-unicons";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/utils/store";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+
+//REDUCER ACTIONS
 import { closeLoader, openLoader } from "@/utils/reducers/loadReducer";
 
 const Nav = () => {

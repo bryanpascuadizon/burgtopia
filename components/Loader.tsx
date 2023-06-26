@@ -1,6 +1,7 @@
 "use client"
+
 import { RootState } from "@/utils/store";
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 
 const Loader = () => {
