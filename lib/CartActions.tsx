@@ -74,11 +74,32 @@ export const addCartItems = async ({
 export const deleteCartItems = async (userId: string, productId: string) => {
   try {
     const deleteResponse = await fetch(`/api/cart/${userId}/${productId}`, {
-      method: "PATCH",
+      method: "DELETE",
     });
 
     if (deleteResponse.ok) {
       return deleteResponse.ok;
+    }
+
+    return false;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const updateQuantity = async (
+  userId: string,
+  productId: string,
+  type: string
+) => {
+  try {
+    const quantityResponse = await fetch(`/api/cart/${userId}/${productId}`, {
+      method: "PATCH",
+      body: JSON.stringify(type),
+    });
+
+    if (quantityResponse.ok) {
+      return quantityResponse.ok;
     }
 
     return false;

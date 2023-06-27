@@ -9,7 +9,7 @@ const Loader = () => {
   const { isLoading } = loadState;
 
   return isLoading ? (
-    <div className="w-full mb-4">
+    <div className="w-full mb-4 absolute top-0">
       <div className="animate-pulse flex">
         <div className="flex-1">
           <div className="h-1 bg-orange-500"></div>

@@ -1,7 +1,7 @@
 import Image from "next/image";
 //@ts-ignore
 import { UilTrashAlt } from "@iconscout/react-unicons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 //COMPONENTS
 import Counter from "./Counter";
@@ -10,22 +10,36 @@ import Counter from "./Counter";
 import {
   decrementCount,
   incrementCount,
+  modifyCart,
 } from "@/utils/reducers/cartReducer";
 import { openNotif } from "@/utils/reducers/notifsReducer";
 
 //CONSTANTS
-import { ADD, REMOVE } from "@/utils/constants";
+import { ADD, REMOVE, INVALID } from "@/utils/constants";
+import { useSession } from "next-auth/react";
+import { updateQuantity } from "@/lib/CartActions";
+import { closeLoader, openLoader } from "@/utils/reducers/loadReducer";
 
 const CartItem = (params: any) => {
   const { product_id, name, price, image, quantity } = params.data;
   const dispatch = useDispatch();
+  const { data: session }: any = useSession();
 
-  const handleCounter = (type: string) => {
-    if (type === ADD) {
-      dispatch(incrementCount(name));
+  const handleCounter = async (type: string) => {
+    dispatch(openLoader());
+    const updateCart = await updateQuantity(session.user.id, product_id, type);
+
+    if (updateCart) {
+      //Fetch Cart Items
+      const response = await fetch(`/api/cart/${session?.user?.id}`);
+      const cartItems = await response.json();
+
+      dispatch(modifyCart(cartItems.cart_items));
     } else {
-      dispatch(decrementCount(name));
+      dispatch(openNotif({ type: INVALID }));
     }
+
+    dispatch(closeLoader());
   };
 
   return (
