@@ -4,7 +4,7 @@ interface NotifsReducerTypes {
   type: string;
   message: string;
   isOpen: boolean;
-  data?: {}
+  data?: any;
 }
 const initialState: NotifsReducerTypes = {
   type: "",

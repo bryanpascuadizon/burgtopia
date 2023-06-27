@@ -11,28 +11,51 @@ import Counter from "./Counter";
 //REDUCER ACTIONS
 import { openNotif } from "@/utils/reducers/notifsReducer";
 import { modifyCart } from "@/utils/reducers/cartReducer";
+import { closeLoader, openLoader } from "@/utils/reducers/loadReducer";
 
 //CONSTANTS
-import { ADD, REMOVE } from "@/utils/constants";
+import { ADD, INVALID, REMOVE } from "@/utils/constants";
+
+//LIB
+import { addCartItems } from "@/lib/CartActions";
+
 
 const Product = (params: any) => {
-  const { id, name, price, image } = params.data;
+  const { _id, name, price, image } = params.data;
   const [counter, setCounter] = useState<number>(1);
   const dispatch = useDispatch();
-  const { data: session } = useSession();
+  const { data: session }: any = useSession();
 
-  const handleAddToCart = (cartItem: any) => {
+  const handleAddToCart = async (cartItem: any) => {
+
+    dispatch(openLoader());
+
     let newCartItem = {
-      id: cartItem.id,
+      userId: session?.user?.id,
+      productId: cartItem._id,
+      count: counter,
       name: cartItem.name,
       price: cartItem.price,
-      image: cartItem.image,
-      count: counter,
+      image: cartItem.image
     };
 
-    if (counter > 0) dispatch(modifyCart(newCartItem));
+    const handleCart = await addCartItems(newCartItem);
 
-    dispatch(openNotif({ type: ADD, message: `${name} (x${counter})` }));
+    if (handleCart) {
+      //Fetch Cart Items
+      const response = await fetch(`/api/cart/${session?.user?.id}`);
+      const cartItems = await response.json();
+
+      dispatch(modifyCart(cartItems.cart_items));
+
+      dispatch(openNotif({ type: ADD, message: `${name} (x${counter})` }));
+    } else {
+      dispatch(
+        openNotif({ type: INVALID })
+      );
+    }
+    
+    dispatch(closeLoader());
   };
 
   const handleCounter = (type: string) => {
@@ -44,7 +67,7 @@ const Product = (params: any) => {
   };
 
   return (
-    <div className="product_item xs:w-15 xs:m-auto" key={id}>
+    <div className="product_item xs:w-15 xs:m-auto" key={_id}>
       <div className="h-44 mb-5">
         <Image
           src={image}

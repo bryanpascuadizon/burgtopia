@@ -17,7 +17,7 @@ import { openNotif } from "@/utils/reducers/notifsReducer";
 import { ADD, REMOVE } from "@/utils/constants";
 
 const CartItem = (params: any) => {
-  const { id, name, price, image, count } = params.data;
+  const { product_id, name, price, image, quantity } = params.data;
   const dispatch = useDispatch();
 
   const handleCounter = (type: string) => {
@@ -31,11 +31,11 @@ const CartItem = (params: any) => {
   return (
     <div
       className="cart_item rounded-lg grid grid-cols-5 bg-grey-100 mb-5 text-center items-center p-2"
-      key={id}
+      key={name}
     >
       <div className="cart_image">
         <Image
-          key={id}
+          key={name}
           src={image}
           width={80}
           height={80}
@@ -44,9 +44,9 @@ const CartItem = (params: any) => {
         />
       </div>
       <div className="cart_name text-left">{name}</div>
-      <div className="cart_price">${(price * count).toFixed(2)}</div>
+      <div className="cart_price">${(price * quantity).toFixed(2)}</div>
       <div className="cart_counter flex">
-        <Counter counter={count} handleCounter={handleCounter} />
+        <Counter counter={quantity} handleCounter={handleCounter} />
       </div>
       <div className="cart_action">
         <button
@@ -55,8 +55,8 @@ const CartItem = (params: any) => {
             dispatch(
               openNotif({
                 type: REMOVE,
-                message: `${name} (x${count})`,
-                data: { name: name },
+                message: `${name} (x${quantity})`,
+                data: { productId: product_id },
               })
             )
           }

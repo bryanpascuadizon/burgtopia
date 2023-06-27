@@ -10,10 +10,11 @@ import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 //REDUCER ACTIONS
 import { closeLoader, openLoader } from "@/utils/reducers/loadReducer";
+import { modifyCart } from "@/utils/reducers/cartReducer";
 
 const Nav = () => {
   const [provider, setProvider] = useState<any>(null);
-  const { data: session } = useSession();
+  const { data: session }: any = useSession();
   const dispatch = useDispatch();
   const cartState = useSelector((state: RootState) => state.cart);
 
@@ -26,6 +27,20 @@ const Nav = () => {
     };
     setUpProviders();
   }, []);
+
+  useEffect(() => {
+    const fetchCartData = async () => {
+      //Fetch Cart Items
+      if (session) {
+        const response = await fetch(`/api/cart/${session?.user?.id}`);
+        const cartItems = await response.json();
+
+        if (cartItems !== null) dispatch(modifyCart(cartItems.cart_items));
+      }
+    };
+
+    fetchCartData();
+  }, [session]);
 
   const handleSignIn = async (id: any) => {
     dispatch(openLoader());

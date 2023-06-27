@@ -5,29 +5,45 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/utils/store";
 //@ts-ignore
-import { UilCheckCircle } from "@iconscout/react-unicons";
-//@ts-ignore
-import { UilTrashAlt } from "@iconscout/react-unicons";
+import { UilCheckCircle, UilExclamationCircle, UilTrashAlt } from "@iconscout/react-unicons";
 
 //REDUCER ACTIONS
-import { closeNotif } from "@/utils/reducers/notifsReducer";
-import { deleteItemFromCart } from "@/utils/reducers/cartReducer";
+import { openNotif, closeNotif } from "@/utils/reducers/notifsReducer";
+import { closeLoader, openLoader } from "@/utils/reducers/loadReducer";
+import { modifyCart } from "@/utils/reducers/cartReducer";
 
 //CONSTANTS
-import { ADD, REMOVE } from "@/utils/constants";
+import { ADD, REMOVE, INVALID } from "@/utils/constants";
+import { useSession } from "next-auth/react";
+
+//CART ACTIONS
+import { deleteCartItems } from "@/lib/CartActions";
 
 const Notifications = () => {
   const notifState = useSelector((state: RootState) => state.notifs);
-  const dispatch = useDispatch();
-
   const { type, message, isOpen, data } = notifState;
-
+  const dispatch = useDispatch();
+  const { data: session }: any = useSession();
   const cancelButtonRef = useRef(null);
 
-  const handleRemoveItemFromCart = () => {
-    dispatch(deleteItemFromCart({data}))
-    dispatch(closeNotif())
-  }
+  const handleRemoveItemFromCart = async () => {
+    dispatch(openLoader())
+    const deleteCart = await deleteCartItems(session.user.id, data.productId);
+
+    if (deleteCart) {
+      //Fetch Cart Items
+      const response = await fetch(`/api/cart/${session?.user?.id}`);
+      const cartItems = await response.json();
+
+      dispatch(modifyCart(cartItems.cart_items));
+      dispatch(closeNotif())
+    } else {
+      dispatch(closeNotif())
+      dispatch(openNotif({ type: INVALID, message: "" }));
+    }
+
+    dispatch(closeLoader())
+  };
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
@@ -71,18 +87,30 @@ const Notifications = () => {
                             width="40"
                             className="inline"
                           />
-                        ) : (
+                        ) : type === REMOVE ? (
                           <UilTrashAlt
                             height="40"
                             width="40"
                             className="inline"
                           />
+                        ) : type === INVALID ? (
+                          <UilExclamationCircle
+                            height="40"
+                            width="40"
+                            className="inline"
+                          />
+                        ) : (
+                          ""
                         )}
                         <span className="text-black inline align-middle">
                           {" "}
                           {type === ADD
                             ? "Added to your cart:"
-                            : "Remove from your cart?"}
+                            : type === REMOVE
+                            ? "Remove from your cart?"
+                            : type === INVALID
+                            ? "Something wrong happened"
+                            : ""}
                         </span>
                       </Dialog.Title>
                       <div className="mt-5">

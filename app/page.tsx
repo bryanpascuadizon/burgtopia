@@ -12,7 +12,6 @@ const Home = () => {
     const fetchProducts = async () => {
       const fetchList = await fetch("/api/products");
       const products = await fetchList.json();
-
       setProductList(products);
     };
     fetchProducts();
@@ -22,7 +21,7 @@ const Home = () => {
     <div className="home">
       <div className="grid xl:grid-cols-3 lg:grid-cols-2 xs:grid-cols-1 gap-4 mb-10 max-w-15">
         {productList.map((item: any) => (
-          <Product data={item} key={item.id} />
+          <Product data={item} key={item._id} />
         ))}
       </div>
       <br />
