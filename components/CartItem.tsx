@@ -44,7 +44,7 @@ const CartItem = (params: any) => {
 
   return (
     <div
-      className="cart_item rounded-lg grid grid-cols-5 bg-grey-100 mb-5 text-center items-center p-2"
+      className="cart_item rounded-lg grid grid-cols-6 bg-grey-100 mb-5 text-center items-center p-2"
       key={name}
     >
       <div className="cart_image">
@@ -58,7 +58,8 @@ const CartItem = (params: any) => {
         />
       </div>
       <div className="cart_name text-left">{name}</div>
-      <div className="cart_price">${(price * quantity).toFixed(2)}</div>
+      <div className="cart_price">₱{(price).toFixed(2)}</div>
+      <div className="cart_price">₱{(price * quantity).toFixed(2)}</div>
       <div className="cart_counter flex">
         <Counter counter={quantity} handleCounter={handleCounter} />
       </div>

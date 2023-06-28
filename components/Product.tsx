@@ -83,7 +83,7 @@ const Product = (params: any) => {
       {session ? (
         <div className="flex mt-5">
           <Counter counter={counter} handleCounter={handleCounter} />
-          <div className="product_price p-2 text-right font-bold">${price}</div>
+          <div className="product_price p-2 text-right font-bold">₱{price}</div>
           <div className="product_cart p-2 bg-orange-50 rounded-lg">
             <button
               className="self-center text-center text-orange-500"
