@@ -9,10 +9,10 @@ const handler = NextAuth({
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    })
+    }),
   ],
   callbacks: {
-    async session({ session }: {session: any}) {
+    async session({ session }: { session: any }) {
       //Store the user id from MongoDB to session
       const sessionUser = await User.findOne({ email: session.user.email });
       session.user.id = sessionUser._id.toString();
@@ -28,17 +28,19 @@ const handler = NextAuth({
         //if not, create a new user
         if (!isUserExists) {
           await User.create({
-            email: profile?.email,
-            username: profile?.name?.replace(" ", "").toLowerCase(),
+            email: user?.email,
+            username: user?.name?.replace(" ", "").toLowerCase(),
+            name: user?.name,
             //@ts-ignore
-            image: profile.picture,
+            image: profile.image,
           });
-
-          console.log("Google Profile: ", profile)
-          console.log("Google Account: ", account)
-          console.log("Google User: ", user)
-          console.log("Google Credentials: ", credentials)
         }
+
+        console.log("Google Profile: ", profile);
+        console.log("Google Account: ", account);
+        console.log("Google User: ", user);
+        console.log("Google Credentials: ", credentials);
+
         return true;
       } catch (error: any) {
         console.error("Error checking if user exists: ", error.message);

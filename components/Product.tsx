@@ -67,7 +67,7 @@ const Product = (params: any) => {
   };
 
   return (
-    <div className="product_item xs:w-15 xs:m-auto" key={_id}>
+    <div className="product_item" key={_id}>
       <div className="h-44 mb-5">
         <Image
           src={image}

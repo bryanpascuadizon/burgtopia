@@ -40,42 +40,12 @@ export const cartSlice = createSlice({
       state.items = filterCart;
 
       itemPriceReCount(filterCart, state);
-    },
-    incrementCount: (state, action) => {
-      const { payload } = action;
-
-      let temptotalPrice: number = 0;
-
-      state.items.map((item: any) => {
-        if (item.name === payload) item.count += 1;
-        temptotalPrice += item.price * item.count;
-      });
-
-      state.totalPrice = temptotalPrice;
-      state.totalItems += 1;
-    },
-    decrementCount: (state, action) => {
-      const { payload } = action;
-
-      let temptotalPrice: number = 0;
-
-      state.items.map((item: any) => {
-        if (item.name === payload && item.count > 1) {
-          item.count -= 1;
-          state.totalItems -= 1;
-        }
-        temptotalPrice += item.price * item.count;
-      });
-
-      state.totalPrice = temptotalPrice;
-    },
+    }
   },
 });
 
 export const {
   modifyCart,
   deleteItemFromCart,
-  incrementCount,
-  decrementCount,
 } = cartSlice.actions;
 export default cartSlice.reducer;

@@ -18,8 +18,8 @@ module.exports = {
         "grey-100": "#f5f5f5",
         "grey-200": "#eeeeee",
         "grey-300": "#e0e0e0",
-        "green-400": "#bdbdbd",
-        "green-500": "#9e9e9e",
+        "grey-400": "#bdbdbd",
+        "grey-500": "#9e9e9e",
         //ORANGE
         "orange-50": "#fff3e0",
         "orange-100": "#ffe0b2",
@@ -27,6 +27,10 @@ module.exports = {
         "orange-300": "#ffb74d",
         "orange-400": "#ffa726",
         "orange-500": "#ff9800",
+        // //WHITE
+        // "white-50": "#fff3e0",
+        // "white-100": "#ffe0b2",
+        // "white-200": "#ffcc80",
       },
     },
     // screens: {
@@ -37,6 +41,7 @@ module.exports = {
     //   xl: "1280px",
     // },
     screens: {
+      xs: "280px",
       sm: "320px",
       md: "375px",
       lg: "425px",

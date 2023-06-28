@@ -8,8 +8,6 @@ import Counter from "./Counter";
 
 //REDUCER ACTIONS
 import {
-  decrementCount,
-  incrementCount,
   modifyCart,
 } from "@/utils/reducers/cartReducer";
 import { openNotif } from "@/utils/reducers/notifsReducer";
