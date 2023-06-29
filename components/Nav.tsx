@@ -23,7 +23,6 @@ const Nav = () => {
   const { data: session }: any = useSession();
   const dispatch = useDispatch();
   const cartState = useSelector((state: RootState) => state.cart);
-
   const { totalItems } = cartState;
 
   useEffect(() => {
@@ -89,9 +88,6 @@ const Nav = () => {
     <div className="flex flex-between w-full mb-5 mt-5">
       {/* Main Right Navigation */}
       <div className="nav_group flex-grow self-center xl:block lg:hidden md:hidden sm:hidden xs:hidden">
-        <Link href="/" className="nav_group_link" onClick={() => handleHideNav("right")}>
-          BurgTopia
-        </Link>
         <Link href="/" className="nav_group_link" onClick={() => handleHideNav("right")}>
           Menu
         </Link>

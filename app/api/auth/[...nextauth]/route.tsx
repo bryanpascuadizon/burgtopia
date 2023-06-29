@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-
+import FacebookProvider from "next-auth/providers/facebook"
 import User from "@/models/user";
 import { connectToDB } from "@/utils/database";
 
@@ -10,6 +10,10 @@ const handler = NextAuth({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
+    // FacebookProvider({
+    //   clientId: process.env.FACBOOK_ID,
+    //   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    // })
   ],
   callbacks: {
     async session({ session }: { session: any }) {
